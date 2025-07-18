@@ -8,7 +8,7 @@ def get_all_assets(
         skip: int = 0,
         status: Optional[int] = None,
         category: Optional[str] = None,
-        type: Optional[str] = None) -> list[Device]:
+        type: Optional[str] = None) -> list[Asset]:
 
     query = db.query(Asset).join(Os)
 

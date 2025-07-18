@@ -3,13 +3,13 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 
 from schemas.asset import AssetRead
-from crud.asset import get_assets
+from crud.asset import get_all_assets
 from api.deps import get_db
 
 router = APIRouter()
 
-@router.get("/", response_model=List[AssetRead])
-def read_devices(
+@router.get("/all", response_model=List[AssetRead])
+def read_assets(
         skip: int = 0,
         status: Optional[int] = None,
         type: Optional[str] = None,
@@ -17,9 +17,10 @@ def read_devices(
         db: Session = Depends(get_db)
         ):
 
-    devices = get_all_assets(
+    assets = get_all_assets(
             db, 
-            skip=skip, status=status,
+            skip=skip, 
+            status=status,
             type=type,
             category=category)
     
