@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from api import device
+from api import asset
 
 api_router = APIRouter()
-api_router.include_router(device.router, prefix="/devices", tags=["devices"])
+api_router.include_router(asset.router, prefix="/asset", tags=["asset"])
