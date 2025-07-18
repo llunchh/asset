@@ -33,3 +33,28 @@ pip3 install -r requirements.txt
 ```bash
 uvicorn main:app --reload
 ```
+## ✅ 사용 예시
+1. 전체 자산(asset) 조회
+```http
+http://192.168.6.53:8000/api/asset/all
+```
+2. 활성화별 조회
+```http
+http://192.168.6.53:8000/api/asset/all?status=1
+http://192.168.6.53:8000/api/asset/all?status=0
+```
+3. 타입(type)별 조회
+```http
+http://192.168.6.53:8000/api/asset/all?type=vm
+http://192.168.6.53:8000/api/asset/all?type=pm
+```
+4. 카테고리별 조회
+```http
+http://192.168.6.53:8000/api/asset/all?category=server
+http://192.168.6.53:8000/api/asset/all?category=network
+http://192.168.6.53:8000/api/asset/all?category=security
+```
+5. 복합 조회
+```http
+http://192.168.6.53:8000/api/asset/all?status=1&type=vm&category=server
+```
