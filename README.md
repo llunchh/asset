@@ -65,9 +65,6 @@ http://192.168.6.53:8000/api/asset/all
 http://192.168.6.53:8000/api/asset/all?status=1
 http://192.168.6.53:8000/api/asset/all?status=0
 ```
-```json
-[{"id":"Z4S7NBki5RoBm3b83W7mf2","status":1,"type":"vm","category":"server","hostname":"ad-test","ip":"192.168.6.108","os_name":"windows"},{"id":"mqdEooioFC2NxfYvYU8eYM","status":1,"type":"vm","category":"server","hostname":"cyjtest","ip":"192.168.6.53","os_name":"linux"}]
-```
 3. 타입(type)별 조회
 ```bash
 http://192.168.6.53:8000/api/asset/all?type=vm
@@ -82,4 +79,27 @@ http://192.168.6.53:8000/api/asset/all?category=security
 5. 복합 조회
 ```bash
 http://192.168.6.53:8000/api/asset/all?status=1&type=vm&category=server
+```
+응답 예시
+```json
+[
+    {
+        "id":"Z4S7NBki5RoBm3b83W7mf2",
+        "status":1,
+        "type":"vm",
+        "category":"server",
+        "hostname":"ad-test",
+        "ip":"192.168.6.108",
+        "os_name":"windows"
+    },
+    {
+        "id":"mqdEooioFC2NxfYvYU8eYM",
+        "status":1,
+        "type":"vm",
+        "category":"server",
+        "hostname":"cyjtest",
+        "ip":"192.168.6.53",
+        "os_name":"linux"
+    }
+]
 ```
