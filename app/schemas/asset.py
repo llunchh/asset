@@ -1,7 +1,8 @@
+from uuid import UUID
 from pydantic import BaseModel
 
 class AssetRead(BaseModel):
-    id:         str
+    id:         UUID
     status:     int
     type:       str
     category:   str

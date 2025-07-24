@@ -1,4 +1,6 @@
+import uuid
 from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from db.base import Base
 from db.session import engine
@@ -6,7 +8,7 @@ from db.session import engine
 class Asset(Base):
     __tablename__ = "asset"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
     status = Column(Integer, nullable=False)
     type = Column(String, nullable=False)
     category = Column(String, nullable=False)
