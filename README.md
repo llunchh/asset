@@ -7,54 +7,53 @@
 1. Asset 테이블
 ```sql
 CREATE TABLE IF NOT EXISTS asset (
-    id          TEXT PRIMARY KEY,
+    id          UUID PRIMARY KEY,
     status      INTEGER NOT NULL,
     type        TEXT NOT NULL,
     category    TEXT NOT NULL,
     os          INTEGER NOT NULL,
-    hostname    TEXT NOT NULL,
-    ip          TEXT NOT NULL
+    hostname    VARCHAR(255) NOT NULL,
+    ip          INET NOT NULL
 );
 ```
 2. Os 테이블
 ```sql
 CREATE TABLE os (
-    code        INTEGER NOT NULL,
+    code        SERIAL PRIMARY KEY,
     name        TEXT NOT NULL,
-    PRIMARY     KEY(code AUTOINCREMENT)
 )
 ```
 
-## ⚙️  Installation
-
-1. 가상환경(venv) 생성
-```bash
-python3 -m venv asset
-```
-2. 가상환경 경로 진입
-```bash
-cd asset
-```
-3. 가상환경 활성화
-```bash
-source bin/activate
-```
-4. git 경로 이동
+## ⚙️ 실행
+1. repository clone 경로 이동
 ```bash
 cd ~/dev/git
 ```
-5. Repository clone
+2. Repository clone
 ```bash
 git clone git@github.com:rracle/asset.git
 ```
-6. 파이썬 패키지 설치
+3. Docker compose 실행
 ```bash
-pip3 install -r requirements.txt
+docker-compose up -d
 ```
-7. 실행
+4. '
+```bash
+cd asset/app
+```
+5. 실행
 ```bash
 uvicorn main:app --reload
 ```
+6. Docker Container 확인
+```bash
+docker ps
+```
+asset_web, asset_db 기동 확인
+
+## 💭 데이터 입력
+1. DB툴 사용하여 DB(컨테이너)에 데이터 삽입
+
 ## ✅ 사용 예시
 1. 전체 자산(asset) 조회
 ```bash
@@ -84,7 +83,7 @@ http://192.168.6.53:8000/api/asset/all?status=1&type=vm&category=server
 ```json
 [
     {
-        "id":"Z4S7NBki5RoBm3b83W7mf2",
+        "id":"560d9440-47bb-4de8-8138-0add9acf6160",
         "status":1,
         "type":"vm",
         "category":"server",
@@ -93,7 +92,7 @@ http://192.168.6.53:8000/api/asset/all?status=1&type=vm&category=server
         "os_name":"windows"
     },
     {
-        "id":"mqdEooioFC2NxfYvYU8eYM",
+        "id":"08f07553-60b9-4a69-99e4-31ee7b97337d",
         "status":1,
         "type":"vm",
         "category":"server",
