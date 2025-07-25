@@ -25,7 +25,7 @@ CREATE TABLE os (
 ```
 
 ## ⚙️ 실행
-1. repository clone 경로 이동
+1. Repository clone 경로 이동
 ```bash
 cd ~/dev/git
 ```
@@ -33,23 +33,18 @@ cd ~/dev/git
 ```bash
 git clone git@github.com:rracle/asset.git
 ```
-3. Docker compose 실행
+3. Repository 경로 이동
+```bash
+cd asset
+```
+4. Docker compose 실행
 ```bash
 docker-compose up -d
 ```
-4. '
-```bash
-cd asset/app
-```
-5. 실행
-```bash
-uvicorn main:app --reload
-```
-6. Docker Container 확인
+5. Docker Container 확인
 ```bash
 docker ps
 ```
-asset_web, asset_db 기동 확인
 
 ## 💭 데이터 입력
 1. DB툴 사용하여 DB(컨테이너)에 데이터 삽입
