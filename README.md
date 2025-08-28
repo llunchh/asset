@@ -46,9 +46,6 @@ docker-compose up -d
 docker ps
 ```
 
-## 💭 데이터 입력
-1. DB툴 사용하여 DB(컨테이너)에 데이터 삽입
-
 ## ✅ 사용 예시
 1. 전체 자산(asset) 조회
 ```bash
