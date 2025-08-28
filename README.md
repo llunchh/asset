@@ -1,7 +1,7 @@
 # Asset API Server
 
 ## ⚠️  **설명**
-정보시스템 정보를 RESTful API로 제공하는 시스템(iann)
+정보시스템 정보를 RESTful API로 제공하는 시스템
 
 ## 📀 Data 구조
 1. Asset 테이블
