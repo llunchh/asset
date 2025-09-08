@@ -1,15 +1,20 @@
 name: SonarQube Scan
 
 on:
-  push:
+#  push:
+#    branches:
+#      - main
+  pull_request:
     branches:
       - main
 
 jobs:
   sonarqube:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
       
