@@ -46,3 +46,19 @@ jobs:
           IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/asset-web:latest
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
+
+  trivy-scan:
+    needs: docker-deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: image
+          image-ref: ${{ secret.DOCKERHUB_USERNAME }}/asset-web:latest
+          format: "table"
+          exit-code: "0"
+          ignore-unfixed: false
+          severity: "CRITICAL,HIGH,MEDIUM"
+          vuln-type: "os, library"
