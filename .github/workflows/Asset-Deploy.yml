@@ -56,9 +56,9 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
-          image-ref: ${{ secret.DOCKERHUB_USERNAME }}/asset-web:latest
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/asset-web:latest
           format: "table"
           exit-code: "0"
           ignore-unfixed: false
           severity: "CRITICAL,HIGH,MEDIUM"
-          vuln-type: "os, library"
+          vuln-type: "os,library"
