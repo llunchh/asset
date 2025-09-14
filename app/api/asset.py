@@ -30,6 +30,7 @@ def read_assets(
             status=a.status,
             type=a.type,
             category=a.category_obj.name if a.category_obj else "Unknown",
+            subcategory=a.subcategory_obj.name if a.subcategory_obj else "Unknown",
             hostname=a.hostname,
             ip=a.ip,
             os=a.os_obj.name if a.os_obj else "Unknown"

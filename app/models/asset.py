@@ -12,11 +12,13 @@ class Asset(Base):
     status = Column(Integer, nullable=False)
     type = Column(String, nullable=False)
     category = Column(Integer, ForeignKey("category.code"), nullable=False)
+    subcategory = Column(Integer, ForeignKey("subcategory.code"), nullable=False)
     os = Column(Integer, ForeignKey("os.code"), nullable=False)
     hostname = Column(String, nullable=False)
     ip = Column(String, nullable=False)
 
     category_obj = relationship("Category", back_populates="assets")
+    subcategory_obj = relationship("SubCategory", back_populates="assets")
     os_obj = relationship("Os", back_populates="assets")
 
 class Category(Base):
@@ -26,6 +28,14 @@ class Category(Base):
     name = Column(String, nullable=False)
 
     assets = relationship("Asset", back_populates="category_obj")
+
+class SubCategory(Base):
+    __tablename__ = "subcategory"
+
+    code = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+
+    assets = relationship("Asset", back_populates="subcategory_obj")
 
 class Os(Base):
     __tablename__ = "os"
