@@ -14,6 +14,7 @@ def read_assets(
         status: Optional[int] = None,
         type: Optional[str] = None,
         category: Optional[str] = None,
+        subcategory: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
 
@@ -22,7 +23,8 @@ def read_assets(
             skip=skip, 
             status=status,
             type=type,
-            category=category)
+            category=category,
+            subcategory=subcategory)
     
     return [
         AssetRead(
