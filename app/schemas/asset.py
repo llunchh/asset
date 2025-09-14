@@ -5,10 +5,10 @@ class AssetRead(BaseModel):
     id:             UUID
     status:         int
     type:           str
-    category_name:  str
+    category:       str
     hostname:       str
     ip:             str
-    os_name:        str
+    os:             str
 
     class Config:
         orm_mode = True

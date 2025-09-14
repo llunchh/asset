@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS asset (
 CREATE TABLE category (
 	code		SERIAL PRIMARY KEY,
 	name		TEXT NOT NULL
-)
+);
 
 -- 운영체제(OS) 테이블
 CREATE TABLE os (
