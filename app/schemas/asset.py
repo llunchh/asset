@@ -6,6 +6,7 @@ class AssetRead(BaseModel):
     status:         int
     type:           str
     category:       str
+    subcategory:    str
     hostname:       str
     ip:             str
     os:             str
