@@ -29,10 +29,10 @@ def read_assets(
             id=a.id,
             status=a.status,
             type=a.type,
-            category=a.category,
+            category=a.category_obj.name if a.category_obj else "Unknown",
             hostname=a.hostname,
             ip=a.ip,
-            os_name=a.os_obj.name if a.os_obj else "Unknown"
+            os=a.os_obj.name if a.os_obj else "Unknown"
         )
         for a in assets
     ]
