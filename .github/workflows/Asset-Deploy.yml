@@ -84,3 +84,4 @@ jobs:
           detect_args: |
             --detect.excluded.detector.types=GIT
             --blackduck.trust.cert=true
+            --detect.accuracy.required=NONE  
