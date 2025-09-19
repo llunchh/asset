@@ -85,3 +85,4 @@ jobs:
             --detect.excluded.detector.types=GIT
             --blackduck.trust.cert=true
             --detect.accuracy.required=NONE  
+            --detect.blackduck.signature.scanner.paths=/app
