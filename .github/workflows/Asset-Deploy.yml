@@ -83,3 +83,4 @@ jobs:
           blackducksca_scan_full: true
           detect_args: |
             --detect.excluded.detector.types=GIT
+            --blackduck.trust.cert=true
