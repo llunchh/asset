@@ -1,7 +1,7 @@
 # Asset API Server
 
 ## ⚠️  **설명**
-정보시스템 정보를 RESTful API로 제공하는 시스템
+정보시스템 정보를 RESTful API로 제공하는 시스템1
 
 ## 🛠️ CI/CD 파이프라인 구조
 ![pipeline](./pipeline.png)
