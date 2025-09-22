@@ -39,8 +39,28 @@ def get_all_servers(
         query = query.filter(Asset.status == status)
     if type is not None:
         query = query.filter(Asset.type == type)
-    is subcategory is not None:
-        query = query.filter(Subcategory.name == subcategory)
+    if subcategory is not None:
+        query = query.filter(SubCategory.name == subcategory)
 
     return query.offset(skip).all()
 
+def get_all_networks(
+        db: Session,
+        skip: int = 0,
+        status: Optional[int] = None,
+        subcategory: Optional[str] = None,
+        type: Optional[str] = None) -> list[Asset]:
+    
+
+    query = db.query(Asset).join(Os).join(Category).join(SubCategory)
+
+    query = query.filter(Category.name == "network")
+
+    if status is not None:
+        query = query.filter(Asset.status == status)
+    if type is not None:
+        query = query.filter(Asset.type == type)
+    if subcategory is not None:
+        query = query.filter(SubCategory.name == subcategory)
+
+    return query.offset(skip).all()

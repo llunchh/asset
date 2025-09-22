@@ -55,7 +55,8 @@ INSERT INTO os (code, name) VALUES
 (1, 'windosws'),
 (2, 'linux'),
 (3, 'secuos'),
-(4, 'bsd');
+(4, 'bsd'),
+(5, 'ios');
 
 -- asset 테스트 데이터 삽입
 INSERT INTO asset (id, status, type, category, subcategory, os, hostname, ip) VALUES
@@ -67,6 +68,8 @@ INSERT INTO asset (id, status, type, category, subcategory, os, hostname, ip) VA
 ('a4207e9b-170e-41c5-9827-e2b6a519863b', 1, 'vm', 1, 2, 2, 'v3', '192.168.5.120'),
 ('fca729dd-2a86-4d37-9f68-d88d04d7db40', 1, 'pm', 3, 9, 3, 'fw01', '192.168.12.2'),
 ('95ecb45b-afcf-499a-bea3-3fadf50247e1', 1, 'pm', 3, 9, 3, 'fw02', '192.168.12.3'),
+('39959fa8-24ed-4757-a26f-989698a7f698', 1, 'pm', 2, 4, 5, 'bb01', '172.10.70.2'),
+('4cdfb19a-b479-4897-9737-8d2d52e7fd0a', 1, 'pm', 2, 4, 5, 'bb02', '172.10.70.3'),
 ('903753a0-5bc1-4b86-bd55-be8a2ac96a5d', 1, 'vm', 1, 1, 4, 'fileserver', '192.168.6.109'),
 ('d62803fe-af2b-4f5b-a818-4efb437dcbd0', 0, 'pm', 1, 1, 1, 'gw-web', '175.124.141.235'),
 ('11dd6fed-6a86-444e-abf0-27a66c9d708b', 0, 'pm', 1, 1, 1, 'gw-db', '175.124.141.236');
