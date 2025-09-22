@@ -39,3 +39,33 @@ def read_assets(
         )
         for a in assets
     ]
+
+@router.get("/servers", response_model=List[AssetRead])
+def read_servers(
+        skip: int = 0,
+        status: Optional[int] = None,
+        type: Optional[str] = None,
+        subcategory: Optional[str] = None,
+        db: Session = Depends(get_db)
+        ):
+
+    servers = get_all_servers(
+            db,
+            skip=skip,
+            status=status,
+            type=type,
+            subcategory=subcategory)
+
+    return [
+        AssetRead(
+            id=a.id,
+            status=a.status,
+            type=a.type,
+            category=a.category_obj.name if a.category_obj else "Unknown",
+            subcategory=a.subcategory_obj.name if a.subcategory_obj else "Unknown",
+            hostname=a.hostname,
+            ip=a.ip,
+            os=a.os_obj.name if a.os_obj else "Unknown"
+        )
+        for a in servers
+    ]

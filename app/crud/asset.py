@@ -23,3 +23,24 @@ def get_all_assets(
         query = query.filter(SubCategory.name == subcategory)
 
     return query.offset(skip).all()
+
+def get_all_servers(
+        db: Session,
+        skip: int = 0,
+        status: Optional[int] = None,
+        subcategory: Optional[str] = None,
+        type: Optional[str] = None) -> list[Asset]:
+
+    query = db.query(Asset).join(Os).join(Category).join(SubCategory)
+
+    query = query.filter(Category.name == "server")
+
+    if status is not None:
+        query = query.filter(Asset.status == status)
+    if type is not None:
+        query = query.filter(Asset.type == type)
+    is subcategory is not None:
+        query = query.filter(Subcategory.name == subcategory)
+
+    return query.offset(skip).all()
+
