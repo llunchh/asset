@@ -26,7 +26,30 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-  
+
+  blackduck-scan:
+    needs: trivy-scan
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Run Blackudck Scan
+        id: black-duck-sca-scan
+        uses: blackduck-inc/black-duck-security-scan@v2
+        env:
+          DETECT_PROJECT_NAME: ${{ github.event.repository.name }}
+        with:
+          blackducksca_url: ${{ secrets.BLACKDUCK_URL }}
+          blackducksca_token: ${{ secrets.BLACKDUCK_API_TOKEN }}
+          detect_search_depth: 10
+          blackducksca_scan_full: true
+          detect_args: |
+            --detect.excluded.detector.types=GIT
+            --blackduck.trust.cert=true
+            --detect.accuracy.required=NONE 
+
   docker-deploy:
     needs: sonarqube-check
     runs-on: ubuntu-latest
@@ -62,26 +85,3 @@ jobs:
           ignore-unfixed: false
           severity: "CRITICAL,HIGH,MEDIUM"
           vuln-type: "os,library"
-
-  blackduck-scan:
-    needs: trivy-scan
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-      
-      - name: Run Blackudck Scan
-        id: black-duck-sca-scan
-        uses: blackduck-inc/black-duck-security-scan@v2
-        env:
-          DETECT_PROJECT_NAME: ${{ github.event.repository.name }}
-        with:
-          blackducksca_url: ${{ secrets.BLACKDUCK_URL }}
-          blackducksca_token: ${{ secrets.BLACKDUCK_API_TOKEN }}
-          detect_search_depth: 10
-          blackducksca_scan_full: true
-          detect_args: |
-            --detect.excluded.detector.types=GIT
-            --blackduck.trust.cert=true
-            --detect.accuracy.required=NONE  
