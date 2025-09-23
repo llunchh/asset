@@ -1,11 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 from api.routers import api_router
 
 app = FastAPI(
     title="Asset API",
     description="Asset documentation",
-    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    version="1.0.0"
 )
 
 # CORS 허용할 도메인 목록
@@ -25,3 +29,10 @@ app.add_middleware(
 )
 
 app.include_router(api_router, prefix="/api")
+
+# Jinja2 템플릿 설정
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
