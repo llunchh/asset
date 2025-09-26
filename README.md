@@ -4,7 +4,36 @@
 정보시스템 정보를 RESTful API로 제공하는 시스템
 
 ## 🛠️ CI/CD 파이프라인 구조
-![pipeline](./pipeline.png)
+![pipeline](./image/pipeline.png)
+
+## 🗂️ 디렉토리 구조
+```bash
+├── app
+│   ├── main.py
+│   ├── api
+│   │   ├── asset.py
+│   │   ├── deps.py
+│   │   └── routers.py
+│   ├── crud
+│   │   └── asset.py
+│   ├── db
+│   │   ├── base.py
+│   │   └── session.py
+│   ├── models
+│   │   └── asset.py
+│   ├── schemas
+│   │   └── asset.py
+│   └── templates
+│       └── index.html
+├── db
+│   └── init.sql
+├── nginx
+│   └── nginx.conf
+├── docker-compose.yml
+├── Dcokerfile
+├── requirements.txt
+└── README.md
+```
 
 ## 📀 Data 구조
 1. 자산(Asset) 테이블
@@ -68,39 +97,79 @@ docker ps
 
 # asset_web, asset_db 컨테이너 확인
 ```
+## 🕸️ WEB 접속
+1. Root 경로("/") 접속
+```bash
+https://asset.emro.co.kr/
+```
+
+2. docs, redocs 경로 접속
+```bash
+https://asset.emro.co.kr/docs
+https://asset.emro.co.kr/redoc
+```
+
+3. API 경로("/api") 접속
+```bash
+https://asset.emro.co.kr/api
+```
 
 ## ✅ 사용 예시
 1. 전체 자산(asset) 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all
+https://asset.emro.co.kr/api/asset/all
 ```
-2. 활성화별 조회
+
+2. 자산별 조회
+- 서버(server) 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all?status=1
-http://192.168.6.53:8000/api/asset/all?status=0
+https://asset.emro.co.kr/api/servers
 ```
-3. 타입(type)별 조회
+- 네트워크(network) 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all?type=vm
-http://192.168.6.53:8000/api/asset/all?type=pm
+https://asset.emro.co.kr/api/networks
 ```
-4. 분류(category)별 조회
+- 보안장비(security) 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all?category=server
-http://192.168.6.53:8000/api/asset/all?category=network
-http://192.168.6.53:8000/api/asset/all?category=security
+https://asset.emro.co.kr/api/securities
 ```
-5. 세분류(subcategory)별 조회
+- 저장장치(storage) 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all?subcategory=firewall
-http://192.168.6.53:8000/api/asset/all?subcategory=l3_switch
-http://192.168.6.53:8000/api/asset/all?subcategory=app_server
+https://asset.emro.co.kr/api/storages
 ```
-6. 복합 조회
+
+3. 복합 조회
+- 상태별(status) 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all?status=1&type=vm&category=server&subcategory=app_server
+# 활성화된 장비 조회
+https://asset.emro.co.kr/api/asset/all?status=1
+# 비활성화된 서버 조회
+https://asset.emro.co.kr/api/servers?status=0
 ```
-7. 응답 예시
+- 타입(type)별 조회
+```bash
+# 가상장비 조회
+https://asset.emro.co.kr/api/asset/all?type=vm
+# 물리장비 조회
+https://asset.emro.co.kr/api/asset/all?type=pm
+```
+- 분류(category)별 조회
+```bash
+https://asset.emro.co.kr/api/asset/all?category=server
+https://asset.emro.co.kr/api/asset/all?category=network
+https://asset.emro.co.kr/api/asset/all?category=security
+```
+- 세분류(subcategory)별 조회
+```bash
+https://asset.emro.co.kr/api/asset/all?subcategory=firewall
+https://asset.emro.co.kr/api/servers?subcategory=app_server
+https://asset.emro.co.kr/api/networks?subcategory=l3_switch
+```
+- 복합 조회
+```bash
+https://asset.emro.co.kr/api/asset/all?status=1&type=vm&category=server&subcategory=app_server
+```
+4. 응답 예시
 ```json
 [
     {
