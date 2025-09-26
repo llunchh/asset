@@ -121,50 +121,55 @@ https://asset.emro.co.kr/api/asset/all
 ```
 
 2. 자산별 조회
- 1) 서버(server) 조회
+- 서버(server) 조회
 ```bash
 https://asset.emro.co.kr/api/servers
 ```
- 2) 네트워크(network) 조회
+- 네트워크(network) 조회
 ```bash
 https://asset.emro.co.kr/api/networks
 ```
- 3) 보안장비(security) 조회
+- 보안장비(security) 조회
 ```bash
 https://asset.emro.co.kr/api/securities
 ```
- 4) 저장장치(storage) 조회
+- 저장장치(storage) 조회
 ```bash
 https://asset.emro.co.kr/api/storages
 ```
 
 3. 복합 조회
+- 상태별(status) 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all?status=1
-http://192.168.6.53:8000/api/asset/all?status=0
+# 활성화된 장비 조회
+https://asset.emro.co.kr/api/asset/all?status=1
+# 비활성화된 서버 조회
+https://asset.emro.co.kr/api/servers?status=0
 ```
-3. 타입(type)별 조회
+- 타입(type)별 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all?type=vm
-http://192.168.6.53:8000/api/asset/all?type=pm
+# 가상장비 조회
+https://asset.emro.co.kr/api/asset/all?type=vm
+# 물리장비 조회
+https://asset.emro.co.kr/api/asset/all?type=pm
 ```
-4. 분류(category)별 조회
+- 분류(category)별 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all?category=server
-http://192.168.6.53:8000/api/asset/all?category=network
-http://192.168.6.53:8000/api/asset/all?category=security
+https://asset.emro.co.kr/api/asset/all?category=server
+https://asset.emro.co.kr/api/asset/all?category=network
+https://asset.emro.co.kr/api/asset/all?category=security
 ```
-5. 세분류(subcategory)별 조회
+- 세분류(subcategory)별 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all?subcategory=firewall
-http://192.168.6.53:8000/api/asset/all?subcategory=l3_switch
-http://192.168.6.53:8000/api/asset/all?subcategory=app_server
+https://asset.emro.co.kr/api/asset/all?subcategory=firewall
+https://asset.emro.co.kr/api/servers?subcategory=app_server
+https://asset.emro.co.kr/api/networks?subcategory=l3_switch
 ```
-6. 복합 조회
+- 복합 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all?status=1&type=vm&category=server&subcategory=app_server
+https://asset.emro.co.kr/api/asset/all?status=1&type=vm&category=server&subcategory=app_server
 ```
-7. 응답 예시
+4. 응답 예시
 ```json
 [
     {
