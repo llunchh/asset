@@ -6,7 +6,7 @@
 ## 🛠️ CI/CD 파이프라인 구조
 ![pipeline](./image/pipeline.png)
 
-## 디렉토리 구조
+## 🗂️ 디렉토리 구조
 ```bash
 ├── app
 │   ├── main.py
@@ -74,8 +74,6 @@ CREATE TABLE os (
 )
 ```
 
-
-
 ## ⚙️ 실행
 1. Repository clone 경로 이동
 ```bash
@@ -99,13 +97,48 @@ docker ps
 
 # asset_web, asset_db 컨테이너 확인
 ```
+## 🕸️ WEB 접속
+1. Root 경로("/") 접속
+```bash
+https://asset.emro.co.kr/
+```
+
+2. docs, redocs 경로 접속
+```bash
+https://asset.emro.co.kr/docs
+https://asset.emro.co.kr/redoc
+```
+
+3. API 경로("/api") 접속
+```bash
+https://asset.emro.co.kr/api
+```
 
 ## ✅ 사용 예시
 1. 전체 자산(asset) 조회
 ```bash
-http://192.168.6.53:8000/api/asset/all
+https://asset.emro.co.kr/api/asset/all
 ```
-2. 활성화별 조회
+
+2. 자산별 조회
+ 1) 서버(server) 조회
+```bash
+https://asset.emro.co.kr/api/servers
+```
+ 2) 네트워크(network) 조회
+```bash
+https://asset.emro.co.kr/api/networks
+```
+ 3) 보안장비(security) 조회
+```bash
+https://asset.emro.co.kr/api/securities
+```
+ 4) 저장장치(storage) 조회
+```bash
+https://asset.emro.co.kr/api/storages
+```
+
+3. 복합 조회
 ```bash
 http://192.168.6.53:8000/api/asset/all?status=1
 http://192.168.6.53:8000/api/asset/all?status=0
