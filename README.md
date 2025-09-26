@@ -4,7 +4,36 @@
 정보시스템 정보를 RESTful API로 제공하는 시스템
 
 ## 🛠️ CI/CD 파이프라인 구조
-![pipeline](./pipeline.png)
+![pipeline](./image/pipeline.png)
+
+## 디렉토리 구조
+```bash
+├── app
+│   ├── main.py
+│   ├── api
+│   │   ├── asset.py
+│   │   ├── deps.py
+│   │   └── routers.py
+│   ├── crud
+│   │   └── asset.py
+│   ├── db
+│   │   ├── base.py
+│   │   └── session.py
+│   ├── models
+│   │   └── asset.py
+│   ├── schemas
+│   │   └── asset.py
+│   └── templates
+│       └── index.html
+├── db
+│   └── init.sql
+├── nginx
+│   └── nginx.conf
+├── docker-compose.yml
+├── Dcokerfile
+├── requirements.txt
+└── README.md
+```
 
 ## 📀 Data 구조
 1. 자산(Asset) 테이블
@@ -44,6 +73,8 @@ CREATE TABLE os (
     name        TEXT NOT NULL,
 )
 ```
+
+
 
 ## ⚙️ 실행
 1. Repository clone 경로 이동
