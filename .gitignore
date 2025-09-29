@@ -1,1 +1,25 @@
-__pycache__
+# macOS 시스템 파일
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows 시스템 파일
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux 시스템 파일
+*~
+
+# 편집기 임시 파일
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
