@@ -28,7 +28,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   blackduck-scan:
-    needs: trivy-scan
+    needs: sonarqube-check
     runs-on: self-hosted
 
     steps:
@@ -51,7 +51,7 @@ jobs:
             --detect.accuracy.required=NONE 
 
   docker-deploy:
-    needs: sonarqube-check
+    needs: blackduck-scan
     runs-on: ubuntu-latest
 
     steps:
@@ -71,7 +71,7 @@ jobs:
           docker push $IMAGE_NAME
 
   trivy-scan:
-    needs: docker-deploy
+    needs: docker-deplay
     runs-on: ubuntu-latest
 
     steps:
