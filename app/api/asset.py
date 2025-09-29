@@ -79,3 +79,41 @@ def read_networks(
             subcategory=subcategory)
 
     return assets_to_schema(networks)
+
+
+@router.get("/security", response_model=List[AssetRead])
+def read_security(
+        skip: int = 0,
+        status: Optional[int] = None,
+        type: Optional[str] = None,
+        subcategory: Optional[str] = None,
+        db: Session = Depends(get_db)
+        ):
+    
+    security = get_all_security(
+            db,
+            skip=skip,
+            status=status,
+            type=type,
+            subcategory=subcategory)
+    
+    return assets_to_schema(security)
+
+
+@router.get("/storages", response_model=List[AssetRead])
+def read_storage(
+        skip: int = 0,
+        status: Optional[int] = None,
+        type: Optional[str] = None,
+        subcategory: Optional[str] = None,
+        db: Session = Depends(get_db)
+        ):
+    
+    storages = get_all_storages(
+            db,
+            skip=skip,
+            status=status,
+            type=type,
+            subcategory=subcategory)
+    
+    return assets_to_schema(storages)
