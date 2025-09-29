@@ -71,7 +71,7 @@ jobs:
           docker push $IMAGE_NAME
 
   trivy-scan:
-    needs: docker-deplay
+    needs: docker-deploy
     runs-on: ubuntu-latest
 
     steps:
