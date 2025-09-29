@@ -81,7 +81,7 @@ def read_networks(
     return assets_to_schema(networks)
 
 
-@router.get("/security", response_model=List[AssetRead])
+@router.get("/securities", response_model=List[AssetRead])
 def read_security(
         skip: int = 0,
         status: Optional[int] = None,
