@@ -64,3 +64,4 @@ def get_all_networks(
         query = query.filter(SubCategory.name == subcategory)
 
     return query.offset(skip).all()
+
