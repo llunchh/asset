@@ -7,6 +7,9 @@ on:
 
 jobs:
   sonarqube-check:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
 
     steps:
@@ -28,6 +31,9 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   blackduck-scan:
+    permissions:
+      contents: read
+      pull-requests: write
     needs: sonarqube-check
     runs-on: self-hosted
 
@@ -51,6 +57,9 @@ jobs:
             --detect.accuracy.required=NONE 
 
   docker-deploy:
+    permissions:
+      contents: read
+      pull-requests: write
     needs: blackduck-scan
     runs-on: ubuntu-latest
 
@@ -71,6 +80,9 @@ jobs:
           docker push $IMAGE_NAME
 
   trivy-scan:
+    permissions:
+      contents: read
+      pull-requests: write
     needs: docker-deploy
     runs-on: ubuntu-latest
 
