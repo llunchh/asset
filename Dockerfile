@@ -1,5 +1,5 @@
 # 3.13.x 계열의 최신 패치를 자동 반영 (보안 업데이트 자동 흡수)
-FROM python:3.13-slim
+FROM python:3.11-slim
 
 # 작업 디렉토리 이동
 WORKDIR /app
