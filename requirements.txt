@@ -6,7 +6,8 @@ fastapi==0.116.1
 h11==0.16.0
 Jinja2==3.1.6
 pio==0.0.3
-psycopg2-binary==2.9.9
+#psycopg2-binary==2.9.9
+psycopg[binary]==3.2.10
 pydantic==2.11.7
 pydantic_core==2.33.2
 python-dotenv==1.1.1
