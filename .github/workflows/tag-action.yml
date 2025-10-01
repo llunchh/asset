@@ -1,4 +1,4 @@
-name: Asset-Deploy
+name: main-action
 
 on:
   pull_request:
@@ -76,7 +76,8 @@ jobs:
 
       - name: Build and Push Web Image
         run: |
-          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/asset-web:latest
+          IMAGE_TAG=${{ github.ref_name }}
+          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/asset-web:$IMAGE_TAG
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
@@ -92,7 +93,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
-          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/asset-web:latest
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/asset-web:${{ github.ref_name }}
           format: "table"
           exit-code: "0"
           ignore-unfixed: false
