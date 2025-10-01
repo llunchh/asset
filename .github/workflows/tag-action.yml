@@ -1,11 +1,9 @@
-name: tag-action
+name: main-action
 
 on:
-  push:
-    tag:
-      - 'v*.*.*'
-  release:
-    types: [published]
+  pull_request:
+    branches:
+      - main
 
 jobs:
   sonarqube-check:
