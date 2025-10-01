@@ -14,6 +14,7 @@ RUN groupadd --system assetgroup && useradd --system --create-home --gid assetgr
 
 # 복사 전 권한 준비
 COPY --chown=assetuser:assetgroup requirements.txt .
+RUN pip install --upgrade pip setuptools
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 소스 복사 (권한 소유자 변경)
