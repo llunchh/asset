@@ -1,15 +1,8 @@
-# 3.13.x 계열의 최신 패치를 자동 반영 (보안 업데이트 자동 흡수)
+# 3.11.x 계열의 최신 패치를 자동 반영 (보안 업데이트 자동 흡수)
 FROM python:3.11-slim
 
 # 작업 디렉토리 이동
 WORKDIR /app
-
-# 패키지 저장소의 목록을 최신 상태로 업데이트 + 빌드/PG 의존성 설치
-# psycopg2/psycopg가 3.13에서 휠이 없으면 소스 빌드 → pg_config 필요
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
-      build-essential gcc libpq-dev pkg-config \
- && rm -rf /var/lib/apt/lists/*
 
 # 패키지 저장소의 목록을 최신 상태로 업데이트
 RUN apt-get update
