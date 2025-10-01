@@ -55,6 +55,7 @@ jobs:
             --detect.excluded.detector.types=GIT
             --blackduck.trust.cert=true
             --detect.accuracy.required=NONE 
+            --detect.project.version.name=${{ github.ref_name }}
 
   docker-deploy:
     permissions:
