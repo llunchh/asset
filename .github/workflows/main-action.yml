@@ -12,7 +12,7 @@ jobs:
       latest_tag: ${{ steps.get_latest_tag.outputs.latest_tag }}
     steps:
       - name: Checkout repository
-        uses: action/checkout@v4
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Get latest tag
