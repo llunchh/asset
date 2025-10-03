@@ -76,7 +76,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    needs: blackduck-scan
+    needs: [blackduck-scan, get_tag]
     runs-on: ubuntu-latest
 
     steps:
@@ -100,7 +100,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    needs: docker-deploy
+    needs: [docker-deploy, get_tag]
     runs-on: ubuntu-latest
 
     steps:
