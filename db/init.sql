@@ -1,6 +1,6 @@
 -- 자산(asset) 테이블
 CREATE TABLE IF NOT EXISTS asset (
-	id			UUID PRIMARY KEY,
+	id			UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	status		INTEGER NOT NULL,
 	type		TEXT NOT NULL,
 	category	INTEGER NOT NULL,
@@ -26,6 +26,16 @@ CREATE TABLE subcategory (
 CREATE TABLE os (
 	code		SERIAL PRIMARY KEY,
 	name		TEXT NOT NULL
+);
+
+-- 계정(account) 테이블
+CREATE TABLE account (
+	id BIGSERIAL 	PRIMARY KEY,
+	account_name 	VARCHAR(100) NOT NULL,
+	password 		VARCHAR(255) NOT NULL,
+	asset_id		UUID NOT NULL,
+	created_at 		TIMESTAMP DEFAULT now(),
+	updated_at 		TIMESTAMP DEFAULT now()
 );
 
 -- 분류(category) 데이터 삽입
@@ -59,18 +69,18 @@ INSERT INTO os (code, name) VALUES
 (5, 'ios');
 
 -- asset 테스트 데이터 삽입
-INSERT INTO asset (id, status, type, category, subcategory, os, hostname, ip) VALUES
-('d95cd69a-c55a-4d78-abb3-e49aa937c8a5', 1, 'vm', 1, 1, 1, 'ad-test', '192.168.6.108'),
-('ef3816af-1be1-473c-8648-2cc375449450', 1, 'vm', 1, 1, 2, 'dns', '192.168.5.55'),
-('6b75c4a3-2eb6-40b4-a6cd-6cc0926581ba', 0, 'vm', 1, 1, 2, 'ubuntu-test', '192.168.6.86'),
-('b48d7409-6caa-4552-91df-93aece819547', 0, 'vm', 1, 1, 2, 'cyj-test', '192.168.6.53'),
-('d47f28fc-5d04-42e2-8b41-e8f52b9aa2ca', 1, 'pm', 1, 2, 1, 'nasca&escort', '192.168.5.108'),
-('a4207e9b-170e-41c5-9827-e2b6a519863b', 1, 'vm', 1, 2, 2, 'v3', '192.168.5.120'),
-('fca729dd-2a86-4d37-9f68-d88d04d7db40', 1, 'pm', 3, 9, 3, 'fw01', '192.168.12.2'),
-('95ecb45b-afcf-499a-bea3-3fadf50247e1', 1, 'pm', 3, 9, 3, 'fw02', '192.168.12.3'),
-('39959fa8-24ed-4757-a26f-989698a7f698', 1, 'pm', 2, 4, 5, 'bb01', '172.10.70.2'),
-('4cdfb19a-b479-4897-9737-8d2d52e7fd0a', 1, 'pm', 2, 4, 5, 'bb02', '172.10.70.3'),
-('903753a0-5bc1-4b86-bd55-be8a2ac96a5d', 1, 'vm', 1, 1, 4, 'fileserver', '192.168.6.109'),
-('d62803fe-af2b-4f5b-a818-4efb437dcbd0', 0, 'pm', 1, 1, 1, 'gw-web', '175.124.141.235'),
-('11dd6fed-6a86-444e-abf0-27a66c9d708b', 0, 'pm', 1, 1, 1, 'gw-db', '175.124.141.236');
+INSERT INTO asset (status, type, category, subcategory, os, hostname, ip) VALUES
+(1, 'vm', 1, 1, 1, 'ad-test', '192.168.6.108'),
+(1, 'vm', 1, 1, 2, 'dns', '192.168.5.55'),
+(0, 'vm', 1, 1, 2, 'ubuntu-test', '192.168.6.86'),
+(0, 'vm', 1, 1, 2, 'cyj-test', '192.168.6.53'),
+(1, 'pm', 1, 2, 1, 'nasca&escort', '192.168.5.108'),
+(1, 'vm', 1, 2, 2, 'v3', '192.168.5.120'),
+(1, 'pm', 3, 9, 3, 'fw01', '192.168.12.2'),
+(1, 'pm', 3, 9, 3, 'fw02', '192.168.12.3'),
+(1, 'pm', 2, 4, 5, 'bb01', '172.10.70.2'),
+(1, 'pm', 2, 4, 5, 'bb02', '172.10.70.3'),
+(1, 'vm', 1, 1, 4, 'fileserver', '192.168.6.109'),
+(0, 'pm', 1, 1, 1, 'gw-web', '175.124.141.235'),
+(0, 'pm', 1, 1, 1, 'gw-db', '175.124.141.236');
 
