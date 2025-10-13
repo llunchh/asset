@@ -1,4 +1,4 @@
-name: Asset-Deploy
+name: main-action
 
 on:
   pull_request:
@@ -6,6 +6,24 @@ on:
       - main
 
 jobs:
+  get_tag:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    outputs:
+      latest_tag: ${{ steps.get_latest_tag.outputs.latest_tag }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get latest tag
+        id: get_latest_tag
+        run: |
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "latest_tag=${latest_tag}" >> $GITHUB_OUTPUT
+
   sonarqube-check:
     permissions:
       contents: read
@@ -14,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
@@ -34,7 +52,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    needs: sonarqube-check
+    needs: [sonarqube-check, get_tag]
     runs-on: self-hosted
 
     steps:
@@ -55,13 +73,13 @@ jobs:
             --detect.excluded.detector.types=GIT
             --blackduck.trust.cert=true
             --detect.accuracy.required=NONE 
-            --detect.project.version.name=${{ github.ref_name }}
+            --detect.project.version.name=${{ needs.get_tag.outputs.latest_tag }}
 
   docker-deploy:
     permissions:
       contents: read
       pull-requests: write
-    needs: blackduck-scan
+    needs: [blackduck-scan, get_tag]
     runs-on: ubuntu-latest
 
     steps:
@@ -76,7 +94,8 @@ jobs:
 
       - name: Build and Push Web Image
         run: |
-          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/asset-web:latest
+          IMAGE_TAG=${{ needs.get_tag.outputs.latest_tag }}
+          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/asset-web:$IMAGE_TAG
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
@@ -84,7 +103,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    needs: docker-deploy
+    needs: [docker-deploy, get_tag]
     runs-on: ubuntu-latest
 
     steps:
@@ -92,7 +111,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
-          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/asset-web:latest
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/asset-web:${{ needs.get_tag.outputs.latest_tag }}
           format: "table"
           exit-code: "0"
           ignore-unfixed: false
