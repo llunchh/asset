@@ -1,5 +1,5 @@
 from uuid import UUID
-from pydantic import BaseModel
+from pydantic import BaseModel, IPvAnyAddress
 
 class AssetRead(BaseModel):
     id:             UUID
@@ -8,7 +8,7 @@ class AssetRead(BaseModel):
     category:       str
     subcategory:    str
     hostname:       str
-    ip:             str
+    ip:             IPvAnyAddress
     os:             str
 
     class Config:
