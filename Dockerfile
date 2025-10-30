@@ -25,4 +25,3 @@ USER assetuser
 
 # 애플리케이션 기동 (uvicorn이 requirements에 있어야 함)
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
