@@ -30,12 +30,13 @@ CREATE TABLE os (
 
 -- 계정(account) 테이블
 CREATE TABLE account (
-	id BIGSERIAL 	PRIMARY KEY,
-	account_name 	VARCHAR(100) NOT NULL,
-	password 		VARCHAR(255) NOT NULL,
-	asset_id		UUID NOT NULL,
-	created_at 		TIMESTAMP DEFAULT now(),
-	updated_at 		TIMESTAMP DEFAULT now()
+    id 			UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username 	VARCHAR(255) NOT NULL,
+    password 	TEXT NOT NULL,
+    asset_id 	UUID NOT NULL,
+    create_at 	TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    update_at 	TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    CONSTRAINT fk_asset FOREIGN KEY (asset_id) REFERENCES asset (id) ON DELETE CASCADE
 );
 
 -- 분류(category) 데이터 삽입

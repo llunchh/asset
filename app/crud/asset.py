@@ -2,6 +2,8 @@ from sqlalchemy.orm import Session
 from models.asset import Asset, Category, SubCategory, Os
 from schemas.asset import AssetRead
 from typing import Optional
+from sqlalchemy import cast
+from sqlalchemy.dialects.postgresql import INET
 
 def get_all_assets(
         db: Session, 
@@ -9,7 +11,9 @@ def get_all_assets(
         status: Optional[int] = None,
         category: Optional[str] = None,
         subcategory: Optional[str] = None,
-        type: Optional[str] = None) -> list[Asset]:
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
+        type: Optional[str] = None) -> list[Asset]: 
 
     query = db.query(Asset).join(Os).join(Category).join(SubCategory)
 
@@ -21,6 +25,10 @@ def get_all_assets(
         query = query.filter(Category.name == category)
     if subcategory is not None:
         query = query.filter(SubCategory.name == subcategory)
+    if hostname is not None:
+        query = query.filter(Asset.hostname == hostname)
+    if ip is not None:
+        query = query.filter(Asset.ip == cast(ip, INET))
 
     return query.offset(skip).all()
 
@@ -29,6 +37,8 @@ def get_all_servers(
         skip: int = 0,
         status: Optional[int] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         type: Optional[str] = None) -> list[Asset]:
 
     query = db.query(Asset).join(Os).join(Category).join(SubCategory)
@@ -41,6 +51,10 @@ def get_all_servers(
         query = query.filter(Asset.type == type)
     if subcategory is not None:
         query = query.filter(SubCategory.name == subcategory)
+    if hostname is not None:
+        query = query.filter(Asset.hostname == hostname)
+    if ip is not None:
+        query = query.filter(Asset.ip == cast(ip, INET))
 
     return query.offset(skip).all()
 
@@ -49,9 +63,10 @@ def get_all_networks(
         skip: int = 0,
         status: Optional[int] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         type: Optional[str] = None) -> list[Asset]:
     
-
     query = db.query(Asset).join(Os).join(Category).join(SubCategory)
 
     query = query.filter(Category.name == "network")
@@ -62,15 +77,20 @@ def get_all_networks(
         query = query.filter(Asset.type == type)
     if subcategory is not None:
         query = query.filter(SubCategory.name == subcategory)
+    if hostname is not None:
+        query = query.filter(Asset.hostname == hostname)
+    if ip is not None:
+        query = query.filter(Asset.ip == cast(ip, INET))
 
     return query.offset(skip).all()
-
 
 def get_all_security(
         db: Session,
         skip: int = 0,
         status: Optional[int] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         type: Optional[str] = None) -> list[Asset]:
     
     query = db.query(Asset).join(Os).join(Category).join(SubCategory)
@@ -83,6 +103,10 @@ def get_all_security(
         query = query.filter(Asset.type == type)
     if subcategory is not None:
         query = query.filter(SubCategory.name == subcategory)
+    if hostname is not None:
+        query = query.filter(Asset.hostname == hostname)
+    if ip is not None:
+        query = query.filter(Asset.ip == cast(ip, INET))
         
     return query.offset(skip).all()
 
@@ -91,8 +115,9 @@ def get_all_storages(
         skip: int = 0,
         status: Optional[int] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         type: Optional[str] = None) -> list[Asset]:
-    
     
     query = db.query(Asset).join(Os).join(Category).join(SubCategory)
     
@@ -104,5 +129,9 @@ def get_all_storages(
         query = query.filter(Asset.type == type)
     if subcategory is not None:
         query = query.filter(SubCategory.name == subcategory)
+    if hostname is not None:
+        query = query.filter(Asset.hostname == hostname)
+    if ip is not None:
+        query = query.filter(Asset.ip == cast(ip, INET))
         
     return query.offset(skip).all()

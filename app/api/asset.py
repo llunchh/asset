@@ -30,6 +30,8 @@ def read_assets(
         type: Optional[str] = None,
         category: Optional[str] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
 
@@ -39,7 +41,9 @@ def read_assets(
             status=status,
             type=type,
             category=category,
-            subcategory=subcategory)
+            subcategory=subcategory,
+            hostname=hostname,
+            ip=ip)
 
     return assets_to_schema(assets)
 
@@ -49,6 +53,8 @@ def read_servers(
         status: Optional[int] = None,
         type: Optional[str] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
 
@@ -57,7 +63,9 @@ def read_servers(
             skip=skip,
             status=status,
             type=type,
-            subcategory=subcategory)
+            subcategory=subcategory,
+            hostname=hostname,
+            ip=ip)
 
     return assets_to_schema(servers)
 
@@ -68,6 +76,8 @@ def read_networks(
         status: Optional[int] = None,
         type: Optional[str] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
 
@@ -76,7 +86,9 @@ def read_networks(
             skip=skip,
             status=status,
             type=type,
-            subcategory=subcategory)
+            subcategory=subcategory,
+            hostname=hostname,
+            ip=ip)
 
     return assets_to_schema(networks)
 
@@ -87,6 +99,8 @@ def read_security(
         status: Optional[int] = None,
         type: Optional[str] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
     
@@ -95,7 +109,9 @@ def read_security(
             skip=skip,
             status=status,
             type=type,
-            subcategory=subcategory)
+            subcategory=subcategory,
+            hostname=hostname,
+            ip=ip)
     
     return assets_to_schema(security)
 
@@ -106,6 +122,8 @@ def read_storage(
         status: Optional[int] = None,
         type: Optional[str] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
     
@@ -114,6 +132,8 @@ def read_storage(
             skip=skip,
             status=status,
             type=type,
-            subcategory=subcategory)
+            subcategory=subcategory,
+            hostname=hostname,
+            ip=ip)
     
     return assets_to_schema(storages)
