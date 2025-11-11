@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 
 from schemas.asset import AssetRead
-from crud.asset import get_all_assets, get_all_servers, get_all_networks
+from crud.asset import get_all_assets, get_all_servers, get_all_networks, get_all_securities, get_all_storages
 from api.deps import get_db
 
 router = APIRouter()
@@ -104,7 +104,7 @@ def read_security(
         db: Session = Depends(get_db)
         ):
     
-    security = get_all_security(
+    security = get_all_securities(
             db,
             skip=skip,
             status=status,
