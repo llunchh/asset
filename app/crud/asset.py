@@ -66,7 +66,7 @@ def get_all_networks(
     return query.offset(skip).all()
 
 
-def get_all_securities(
+def get_all_security(
         db: Session,
         skip: int = 0,
         status: Optional[int] = None,
