@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 
 from schemas.asset import AssetRead
-from crud.asset import get_all_assets, get_all_servers, get_all_networks
+from crud.asset import get_all_assets, get_all_servers, get_all_networks, get_all_securities, get_all_storages
 from api.deps import get_db
 
 router = APIRouter()
@@ -30,6 +30,8 @@ def read_assets(
         type: Optional[str] = None,
         category: Optional[str] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
 
@@ -39,7 +41,9 @@ def read_assets(
             status=status,
             type=type,
             category=category,
-            subcategory=subcategory)
+            subcategory=subcategory,
+            hostname=hostname,
+            ip=ip)
 
     return assets_to_schema(assets)
 
@@ -49,6 +53,8 @@ def read_servers(
         status: Optional[int] = None,
         type: Optional[str] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
 
@@ -57,7 +63,9 @@ def read_servers(
             skip=skip,
             status=status,
             type=type,
-            subcategory=subcategory)
+            subcategory=subcategory,
+            hostname=hostname,
+            ip=ip)
 
     return assets_to_schema(servers)
 
@@ -68,6 +76,8 @@ def read_networks(
         status: Optional[int] = None,
         type: Optional[str] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
 
@@ -76,7 +86,9 @@ def read_networks(
             skip=skip,
             status=status,
             type=type,
-            subcategory=subcategory)
+            subcategory=subcategory,
+            hostname=hostname,
+            ip=ip)
 
     return assets_to_schema(networks)
 
@@ -87,15 +99,19 @@ def read_security(
         status: Optional[int] = None,
         type: Optional[str] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
     
-    security = get_all_security(
+    security = get_all_securities(
             db,
             skip=skip,
             status=status,
             type=type,
-            subcategory=subcategory)
+            subcategory=subcategory,
+            hostname=hostname,
+            ip=ip)
     
     return assets_to_schema(security)
 
@@ -106,6 +122,8 @@ def read_storage(
         status: Optional[int] = None,
         type: Optional[str] = None,
         subcategory: Optional[str] = None,
+        hostname: Optional[str] = None,
+        ip: Optional[str] = None,
         db: Session = Depends(get_db)
         ):
     
@@ -114,6 +132,8 @@ def read_storage(
             skip=skip,
             status=status,
             type=type,
-            subcategory=subcategory)
+            subcategory=subcategory,
+            hostname=hostname,
+            ip=ip)
     
     return assets_to_schema(storages)
