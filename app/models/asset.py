@@ -20,6 +20,7 @@ class Asset(Base):
     category_obj = relationship("Category", back_populates="assets")
     subcategory_obj = relationship("SubCategory", back_populates="assets")
     os_obj = relationship("Os", back_populates="assets")
+    accounts = relationship("Account", back_populates="asset_obj")
 
 class Category(Base):
     __tablename__ = "category"
