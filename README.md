@@ -11,24 +11,33 @@
 ├── app
 │   ├── main.py
 │   ├── api
+│   │   ├── account.py
 │   │   ├── asset.py
 │   │   ├── deps.py
 │   │   └── routers.py
 │   ├── crud
+│   │   ├── account.py
 │   │   └── asset.py
 │   ├── db
 │   │   ├── base.py
 │   │   └── session.py
 │   ├── models
+│   │   ├── account.py
 │   │   └── asset.py
 │   ├── schemas
+│   │   ├── account.py
 │   │   └── asset.py
 │   └── templates
 │       └── index.html
 ├── db
 │   └── init.sql
+├── image
+│   └── pipeline.png
 ├── nginx
 │   └── nginx.conf
+├── vault
+│   └── config
+│       └── vault.hcl
 ├── docker-compose.yml
 ├── Dcokerfile
 ├── requirements.txt
@@ -71,7 +80,20 @@ CREATE TABLE subcategory (
 CREATE TABLE os (
     code        SERIAL PRIMARY KEY,
     name        TEXT NOT NULL,
-)
+);
+```
+
+5. 계정(Account) 테이블
+```sql
+CREATE TABLE account (
+    id 			UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username 	VARCHAR(255) NOT NULL,
+    password 	TEXT NOT NULL,
+    asset_id 	UUID NOT NULL,
+    create_at 	TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    update_at 	TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    CONSTRAINT fk_asset FOREIGN KEY (asset_id) REFERENCES asset (id) ON DELETE CASCADE
+);
 ```
 
 ## ⚙️ 실행
@@ -95,7 +117,7 @@ docker-compose up -d
 ```bash
 docker ps
 
-# asset_web, asset_db 컨테이너 확인
+# asset_web, asset_db, nginx, vault 컨테이너 확인
 ```
 ## 🕸️ WEB 접속
 1. Root 경로("/") 접속
@@ -115,6 +137,7 @@ https://asset.emro.co.kr/api
 ```
 
 ## ✅ 사용 예시
+### 자산(Asset) 조회
 1. 전체 자산(asset) 조회
 ```bash
 https://asset.emro.co.kr/api/asset/all
@@ -137,7 +160,6 @@ https://asset.emro.co.kr/api/securities
 ```bash
 https://asset.emro.co.kr/api/storages
 ```
-
 3. 복합 조회
 - 상태별(status) 조회
 ```bash
@@ -193,4 +215,9 @@ https://asset.emro.co.kr/api/asset/all?status=1&type=vm&category=server&subcateg
         "os_name":"windows"
     }
 ]
+```
+### 계정(Asset) 조회
+1. 패스워드 조회
+```bash
+https://asset.emro.co.kr/api/account/password?ip=192.168.5.55&username=root
 ```
