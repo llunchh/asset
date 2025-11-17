@@ -221,3 +221,16 @@ https://asset.emro.co.kr/api/asset/all?status=1&type=vm&category=server&subcateg
 ```bash
 https://asset.emro.co.kr/api/account/password?ip=192.168.5.55&username=root
 ```
+2. 응답 예시
+```json
+[
+    {
+        "id":"5e541024-502f-46af-843d-97b989f1b210",
+        "username":"root",
+        "password":"8282op82@#",
+        "asset_id":"574b766b-cb2b-4c57-9a5c-e80a20165138",
+        "create_at":"2025-11-14T12:31:03.519647Z",
+        "update_at":"2025-11-14T12:31:03.519647Z"
+    }
+]
+```
