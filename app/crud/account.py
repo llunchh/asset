@@ -7,7 +7,22 @@ from models.asset import Asset
 from models.account import Account
 from schemas.account import AccountRead
 
-def get_account_password(
+def get_usernames(
+        db: Session,
+        ip: Optional[str] = None,
+        hostname: Optional[str] = None
+    ) -> list[Account]:
+
+    query = db.query(Account).join(Asset)
+
+    if ip is not None:
+        query = query.filter(Asset.ip == cast(ip, INET))
+    if hostname is not None:
+        query = query.filter(Asset.hostname == hostname)
+
+    return query.all()
+
+def get_password(
         db: Session,
         ip: str,
         username: str
