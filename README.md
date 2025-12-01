@@ -216,7 +216,7 @@ https://asset.emro.co.kr/api/asset/all?status=1&type=vm&category=server&subcateg
     }
 ]
 ```
-### 계정(Asset) 조회
+### 계정(Account) 조회
 1. 패스워드 조회
 ```bash
 https://asset.emro.co.kr/api/account/password?ip=192.168.5.55&username=root
