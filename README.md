@@ -221,7 +221,7 @@ https://asset.emro.co.kr/api/asset/all?status=1&type=vm&category=server&subcateg
 ```bash
 https://asset.emro.co.kr/api/account/password?ip=192.168.5.55&username=root
 ```
-2. 응답 예시
+2. 패스워드 조회 응답 예시
 ```json
 [
     {
@@ -232,5 +232,18 @@ https://asset.emro.co.kr/api/account/password?ip=192.168.5.55&username=root
         "create_at":"2025-11-14T12:31:03.519647Z",
         "update_at":"2025-11-14T12:31:03.519647Z"
     }
+]
+```
+3. 계정 조회
+```bash
+https://asset.emro.co.kr/api/account/usernames?ip=192.168.5.55
+https://asset.emro.co.kr/api/account/usernames?hostname=dns
+```
+4. 계정 조회 응답 예시
+```json
+[
+    "root",
+    "iann",
+    "test"
 ]
 ```
