@@ -1,0 +1,21 @@
+db:
+  user: "lunchadmin"
+  password: "lunch1004!"
+  name: "asset"
+  storage: 1Gi
+
+web:
+  image: "iannchoi/asset-web:v0.4.0"
+  port: 8000
+
+proxy:
+  image: "nginx:latest"
+  ports:
+    - port: 80
+      nodePort: 30080
+    - port: 8081
+      nodePort: 30081
+
+vault:
+  image: "hashicorp/vault:latest"
+  port: 8200
