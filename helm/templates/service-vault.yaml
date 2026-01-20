@@ -3,10 +3,9 @@ kind: Service
 metadata:
   name: vault
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: vault
   ports:
     - port: {{ .Values.vault.port }}
       targetPort: {{ .Values.vault.port }}
-      nodePort: 30820
