@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault
+  template:
+    metadata:
+      labels:
+        app: vault
+    spec:
+      containers:
+        - name: vault
+          image: {{ .Values.vault.image }}
+          ports:
+            - containerPort: {{ .Values.vault.port }}
+          env:
+            - name: VAULT_ADDR
+              value: "http://127.0.0.1:8200"
+            - name: VAULT_API_ADDR
+              value: "http://localhost:8200"
+          securityContext:
+            capabilities:
+              add: ["IPC_LOCK"]
+          command: ["vault", "server", "-config=/vault/config/vault.hcl"]
+          volumeMounts:
+            - name: vault-config
+              mountPath: /vault/config
+            - name: vault-file
+              mountPath: /vault/file
+            - name: vault-logs
+              mountPath: /vault/logs
+      volumes:
+        - name: vault-config
+          configMap:
+            name: vault-config
+        - name: vault-file
+          emptyDir: {}
+        - name: vault-logs
+          emptyDir: {}
