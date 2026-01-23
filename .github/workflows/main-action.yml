@@ -50,6 +50,8 @@ jobs:
             --blackduck.trust.cert=true
             --detect.accuracy.required=NONE 
             --detect.project.version.name=${{ needs.get_tag.outputs.latest_tag }}
+            --logging.level.com.synopsys.integration=DEBUG
+            --detect.timeout=30
 
   docker-deploy:
     permissions:
